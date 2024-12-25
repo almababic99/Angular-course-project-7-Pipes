@@ -4,13 +4,23 @@
       <img src="temp-icon.png" alt="Thermometer icon" />
       <div>
         <h2>Current Temperatures</h2>
-        <p>{{ currentDate }}</p>
+        <p>{{ currentDate | date:'medium' }}</p>   <!-- Built-in date pipe; We need to add DatePipe in app.component.ts in imports -->
+        <!-- Formats a Date value according to locale rules. -->
+        <!-- DatePipe has some format options: short, medium, full, longDate, fullDate... -->
+        <!-- To add these options we add a ':' after 'date' and then the format option we want -->
+        <!-- date:'medium' formats the date like 'MMM d, y, h:mm:ss a'. For example:	Jun 15, 2015, 9:03:01 AM -->
       </div>
     </header>
-    <p>New York: {{ currentTemperaturs.newYork }}</p>
-    <p>Berlin: {{ currentTemperaturs.berlin }}</p>
-    <p>Paris: {{ currentTemperaturs.paris }}</p>
-    <p>Chicago: {{ currentTemperaturs.chicago }}</p>
+    <p>New York: {{ currentTemperaturs.newYork | number:'1.1-2' }}</p>  <!-- Built in decimal pipe; We need to add DecimalPipe in app.component.ts in imports -->
+    <!-- | number:'1.1-2': This applies the number pipe with a formatting pattern of '1.1-2'. -->
+    <!-- The format '1.1-2' specifies the following: -->
+    <!-- Before the dot (1): the minimum number of digits to show to the left of the decimal point. In this case, it’s set to 1, which means there will be at least one digit before the decimal point (this is the "integer" part of the number). -->
+    <!-- After the dot (1-2): This specifies the range of decimal places to show:
+            1 means that there should be at least one digit after the decimal point.
+            2 means that there can be at most two digits after the decimal point. -->
+    <p>Berlin: {{ currentTemperaturs.berlin | number:'1.1-2' }}</p>
+    <p>Paris: {{ currentTemperaturs.paris | number:'1.1-2' }}</p>
+    <p>Chicago: {{ currentTemperaturs.chicago | number:'1.1-2' }}</p>
   </article>
 
   <article class="temperatures">
@@ -28,3 +38,7 @@
     </ul>
   </article>
 </main>
+
+<!-- Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template. Pipes let you declare a transformation function once and then use that transformation across multiple templates. 
+ Angular pipes use the vertical bar character (|) -->
+<!-- Angular includes a set of built-in pipes in the @angular/common package: DatePipe, DecimalPipe... -->
