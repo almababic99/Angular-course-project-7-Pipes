@@ -1,12 +1,13 @@
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TemperaturePipe } from './temperature.pipe';
+import { SortPipe } from './sort.pipe';
 
 @Component({
   selector: 'app-root',   // This defines the custom HTML tag that will represent this component in the HTML. In this case, it’s <app-root>.
   standalone: true,   // This indicates that the component is a standalone component and can be used independently (not part of a module). 
   templateUrl: './app.component.html',   // This refers to the HTML template file (app.component.html) that defines the structure of the component's view (what the user sees on the screen).
-  imports: [DatePipe, DecimalPipe, TemperaturePipe]   
+  imports: [DatePipe, DecimalPipe, TemperaturePipe, SortPipe]   
   // DatePipe is a built-in pipe that allows you to format dates. 
   // DecimalPipe is a built-in pipe that is used to format numeric values.
 })
@@ -23,7 +24,14 @@ export class AppComponent {
     25, 37, 19, -4, 28, 21, 19, 28, 33, 31, 9, 11, 5, -12, -5,
   ];
 
+  // constructor() {
+  //   this.historicTemperatures.sort((a, b) => a > b ? 1 : -1)
+  // }
+
   onReset(index: number) {  // This method accepts an index and resets the temperature at that index in the historicTemperatures array to 18.
-    this.historicTemperatures[index] = 18;
+    // this.historicTemperatures[index] = 18;
+    const newTemps = [...this.historicTemperatures];
+    newTemps[index] = 18;
+    this.historicTemperatures = newTemps;
   }
 }

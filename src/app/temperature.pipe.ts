@@ -1,4 +1,4 @@
-// Custom pipe:
+// Custom pipe for formatting temperature:
 
 import { Pipe, PipeTransform } from "@angular/core";
 
