@@ -1,11 +1,12 @@
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { TemperaturePipe } from './temperature.pipe';
 
 @Component({
   selector: 'app-root',   // This defines the custom HTML tag that will represent this component in the HTML. In this case, it’s <app-root>.
   standalone: true,   // This indicates that the component is a standalone component and can be used independently (not part of a module). 
   templateUrl: './app.component.html',   // This refers to the HTML template file (app.component.html) that defines the structure of the component's view (what the user sees on the screen).
-  imports: [DatePipe, DecimalPipe]   
+  imports: [DatePipe, DecimalPipe, TemperaturePipe]   
   // DatePipe is a built-in pipe that allows you to format dates. 
   // DecimalPipe is a built-in pipe that is used to format numeric values.
 })

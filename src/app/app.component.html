@@ -4,23 +4,42 @@
       <img src="temp-icon.png" alt="Thermometer icon" />
       <div>
         <h2>Current Temperatures</h2>
-        <p>{{ currentDate | date:'medium' }}</p>   <!-- Built-in date pipe; We need to add DatePipe in app.component.ts in imports -->
+        <p>{{ currentDate | date : "medium" }}</p>
+        <!-- Built-in date pipe; We need to add DatePipe in app.component.ts in imports -->
         <!-- Formats a Date value according to locale rules. -->
         <!-- DatePipe has some format options: short, medium, full, longDate, fullDate... -->
         <!-- To add these options we add a ':' after 'date' and then the format option we want -->
         <!-- date:'medium' formats the date like 'MMM d, y, h:mm:ss a'. For example:	Jun 15, 2015, 9:03:01 AM -->
       </div>
     </header>
-    <p>New York: {{ currentTemperaturs.newYork | number:'1.1-2' }}</p>  <!-- Built in decimal pipe; We need to add DecimalPipe in app.component.ts in imports -->
+    <!-- Using built-in DecimalPipe to write temperatures:
+    <p>New York: {{ currentTemperaturs.newYork | number:'1.1-2' }}</p>  
+    -->
+    <!-- Built in decimal pipe; We need to add DecimalPipe in app.component.ts in imports -->
     <!-- | number:'1.1-2': This applies the number pipe with a formatting pattern of '1.1-2'. -->
     <!-- The format '1.1-2' specifies the following: -->
     <!-- Before the dot (1): the minimum number of digits to show to the left of the decimal point. In this case, it’s set to 1, which means there will be at least one digit before the decimal point (this is the "integer" part of the number). -->
     <!-- After the dot (1-2): This specifies the range of decimal places to show:
             1 means that there should be at least one digit after the decimal point.
             2 means that there can be at most two digits after the decimal point. -->
+    <!-- 
     <p>Berlin: {{ currentTemperaturs.berlin | number:'1.1-2' }}</p>
     <p>Paris: {{ currentTemperaturs.paris | number:'1.1-2' }}</p>
     <p>Chicago: {{ currentTemperaturs.chicago | number:'1.1-2' }}</p>
+    -->
+
+    <!-- Using custom TemperaturePipe to write temperatures: -->
+    <p>New York: {{ currentTemperaturs.newYork | temp: 'cel':'fah' }}</p>  <!-- it converts the temperature from Celsius to Fahrenheit. -->
+    <p>Berlin: {{ currentTemperaturs.berlin | temp: 'cel' }}</p>  <!--  it displays the temperature in Celsius. -->
+    <p>Paris: {{ currentTemperaturs.paris | temp: 'fah':'cel' }}</p>  <!-- it converts the temperature from Fahrenheit to Celsius. -->
+    <p>Chicago: {{ currentTemperaturs.chicago | temp: 'fah' }}</p>  <!-- it displays the temperature in Fahrenheit. -->
+
+    <!-- Using custom TemperaturePipe combined with DecimalPipe to write temperatures: -->
+    <!-- <p>New York: {{ currentTemperaturs.newYork | number:'1.1-2' | temp: 'cel':'fah' }}</p>  
+    <p>Berlin: {{ currentTemperaturs.berlin | number:'1.1-2' | temp: 'cel':'fah' }}</p>
+    <p>Paris: {{ currentTemperaturs.paris | number:'1.1-2' | temp: 'cel':'fah' }}</p>
+    <p>Chicago: {{ currentTemperaturs.chicago | number:'1.1-2' | temp: 'cel':'fah' }}</p> -->
+
   </article>
 
   <article class="temperatures">
@@ -33,7 +52,7 @@
     </header>
     <ul>
       @for (temperature of historicTemperatures; track temperature) {
-      <li (click)="onReset($index)">{{ temperature }}</li>
+      <li (click)="onReset($index)">{{ temperature | temp: 'cel' }}</li>
       }
     </ul>
   </article>
